@@ -1,0 +1,36 @@
+﻿@model Auto
+
+@{
+    ViewData["Title"] = "Resgistrar auto";
+}
+
+<h1>Crear nuevo auto</h1>
+<h5>Para registrar entrada y salida debes registrar el vehiculo</h5>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-controller="Autos" asp-action="CrearAuto">
+    <div class="row">
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+            <label asp-for="Placas" class="form-label">PLACAS:</label>
+            <input type="text" class="form-control" asp-for="Placas" />
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+            <label asp-for="Color" class="form-label">COLOR:</label>
+            <input type="text" class="form-control" asp-for="Color" />
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+            <label asp-for="Cliente" class="form-label">CLIENTE:</label>
+            <input type="text" class="form-control" asp-for="Cliente" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-sm-3 col-md-3 col-lg-2">
+            <button type="submit" class="btn btn-primary">Registrar auto</button>
+            <a class="btn btn-secondary" asp-action="IndexAutos">Cancelar</a>
+        </div>
+        
+    </div>
+   
+    
+</form>

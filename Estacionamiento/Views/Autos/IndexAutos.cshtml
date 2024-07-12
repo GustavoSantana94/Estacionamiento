@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Auto>
+@{
+    ViewData["Title"] = "Listado de autos";
+}
+<h5> Autos</h5>
+
+<a asp-action="CrearAuto" class="btn btn-primary mb-3">Crear nuevo</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Placas</th>
+            <th>Color</th>
+            <th>Cliente</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var auto in Model)
+        {
+        <tr>
+            <td>@auto.Placas</td>
+            <td>@auto.Color</td>
+            <td>@auto.Cliente</td>
+            <td><a class="btn btn-danger" asp-action="Borrar" asp-route-id="@auto.Id">Borrar</a></td>
+        </tr>    
+        }
+    </tbody>
+</table>

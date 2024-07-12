@@ -1,0 +1,34 @@
+﻿@model IEnumerable<EntradaSalidaDto>
+@{
+    ViewData["Title"] = "Listado de autos";
+}
+<h5> Entradas / Salidas</h5>
+
+<a asp-action="RegistrarEntrada" class="btn btn-primary mb-3">Registrar Entrada</a>
+<a asp-action="RegistrarSalida" class="btn btn-primary mb-3">Registrar Salida</a>
+<a asp-action="GenerarReporte" class="btn btn-primary mb-3">Genera informe de pagos</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Placas</th>
+            <th>Fecha entrada</th>
+            <th>Fecha salida</th>
+            <th>Precio por minuto</th>
+            <th>Precio total</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var entradaSalida in Model)
+        {
+            <tr>
+                <td>@entradaSalida.Placas</td>
+                <td>@entradaSalida.FechaEntrada</td>
+                <td>@entradaSalida.FechaSalida</td>
+                <td>@entradaSalida.PrecioPorMinuto</td>
+                <td>@entradaSalida.PrecioTotal</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
