@@ -58,5 +58,56 @@ namespace Estacionamiento.Servicios
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync(@"DELETE FROM Autos WHERE Id =@Id", new { Id });
         }
+
+
+        public async Task CrearEntrada(EntradaSalida entradaSalida)
+        {
+
+            using var connection = new SqlConnection(connectionString);
+            var id = await connection.QuerySingleAsync<int>
+                ("SP_INSERTAR_ENTRADA_SALIDA", 
+                new { 
+                    Placas = entradaSalida.Placas, 
+                    PrecioPorMinuto = entradaSalida.PrecioPorMinuto},
+                commandType: System.Data.CommandType.StoredProcedure);
+
+            entradaSalida.Id = id;
+
+        }
+
+        public async Task ActualizarEntrada(EntradaSalida entradaSalida)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync("SP_INSERTAR_ENTRADA_SALIDA",
+                new
+                {
+                    Id = entradaSalida.Id
+                },
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
+
+
+        public async Task ActualizarSalida(int Id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"SP_ACTUALIZAR_ENTRADA_SALIDA",
+                  new
+                  {
+                      Id = Id
+                  },
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
+
+        public async Task<EntradaSalida> ObtenerEntradaSalidaPorId(int Id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<EntradaSalida>
+                ("SP_BUSCA_ENTRADA_SALIDA_POR_ID",
+                 new
+                 {
+                     Id = Id
+                 },
+                commandType: System.Data.CommandType.StoredProcedure);
+        }
     }
 }

@@ -6,13 +6,13 @@ namespace Estacionamiento.Models
     {
         public int Id { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        public int Placas { get; set; }
+        public String Placas { get; set; }
 
-        public int FechaEntrada { get; set; }
+        public DateTime FechaEntrada { get; set; }
 
-        public int FechaSalida { get; set; }
+        public DateTime FechaSalida { get; set; }
         
-        public int PrecioPorMinuto { get; set; }
+        public String PrecioPorMinuto { get; set; }
 
     }
 }

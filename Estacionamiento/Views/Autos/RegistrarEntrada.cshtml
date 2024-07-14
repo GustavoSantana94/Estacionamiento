@@ -1,1 +1,31 @@
-﻿
+﻿@model EntradaSalida
+
+@{
+    ViewData["Title"] = "Resgistrar entrada";
+}
+
+<h1>Registrar entrada</h1>
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<form asp-controller="Autos" asp-action="CrearEntrada">
+    <div class="row">
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+            <label asp-for="Placas" class="form-label">PLACAS:</label>
+            <input type="text" class="form-control" asp-for="Placas" />
+        </div>
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+            <label asp-for="PrecioPorMinuto" class="form-label">PRECIO POR MINUTO:</label>
+            <input type="text" class="form-control" asp-for="PrecioPorMinuto" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="mb-3 col-sm-3 col-md-3 col-lg-2">
+            <button type="submit" class="btn btn-primary">Registrar auto</button>
+            <a class="btn btn-secondary" asp-action="IndexEntradasSalidas">Cancelar</a>
+        </div>
+
+    </div>
+
+
+</form>

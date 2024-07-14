@@ -85,13 +85,13 @@ namespace Estacionamiento.Controllers
         }
 
         [HttpGet]
-        public async Task<FileResult> ExportarExcel(String nombreReporte)
+        public async Task<FileResult> ExportarExcel(ReporteDto nombrereporte)
         {
 
             var reporteEntradasSalidas = await repositorioEntradaSalida.ObtenereEntradasSalidas();
 
 
-            return GenerarExcel(nombreReporte, reporteEntradasSalidas);
+            return GenerarExcel(nombrereporte.nombreReporte, reporteEntradasSalidas);
         }
 
 
@@ -142,13 +142,43 @@ namespace Estacionamiento.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult RegistrarSalida()
+        [HttpPost]
+        public async Task<IActionResult> CrearEntrada(EntradaSalida model)
         {
 
-            return View();
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var existePlacas = await repositorioAuto.ExistePlacas(model.Placas);
+
+            if (!existePlacas)
+            {
+                ModelState.AddModelError(nameof(model.Placas), $"las placas {model.Placas} no existen.");
+
+                return View(model);
+            }
+            await repositorioAuto.CrearEntrada(model);
+
+            return RedirectToAction("IndexEntradasSalidas");
         }
 
-       
+        [HttpGet]
+        public async Task<IActionResult> RegistrarSalida(int Id)
+        {
+            var entradaSalida = await repositorioAuto.ObtenerEntradaSalidaPorId(Id);
+            return View(entradaSalida);
+        }
+
+     
+        [HttpPost]
+        public async Task<IActionResult> CrearSalida(int Id)
+        {
+
+            await repositorioAuto.ActualizarSalida(Id);
+            return RedirectToAction("IndexEntradasSalidas");
+
+        }
     }
 }

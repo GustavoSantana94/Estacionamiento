@@ -11,7 +11,7 @@ var politicaUsuariosaAutenticados = new AuthorizationPolicyBuilder()
     .RequireAuthenticatedUser()
     .Build();
 
-// Add services to the container.
+// Add services to the container. //
 builder.Services.AddControllersWithViews(opciones => {
     opciones.Filters.Add(new AuthorizeFilter(politicaUsuariosaAutenticados));
 });

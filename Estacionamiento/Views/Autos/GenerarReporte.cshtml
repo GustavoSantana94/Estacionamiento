@@ -1,25 +1,31 @@
-﻿
-
+﻿@model ReporteDto
 @{
     ViewData["Title"] = "Generar reporte";
-    var nombreReporte = "1234";
+  
 }
 
+
 <h1>Generar reporte</h1>
+@* 
+<div asp-validation-summary="All" class="text-danger"></div> *@
 
-<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-controller="Autos" asp-action="ExportarExcel" method="get">
+    <div class="row">
+        <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
+            <label asp-for="nombreReporte" class="form-label">Nombre del reporte:</label>
+            <input type="text" id="nombrereporte" class="form-control" asp-for="nombreReporte" />
+        </div>
 
-<div class="row">
-    <div class="mb-3 col-sm-12 col-md-6 col-lg-3">
-        <label for="nombreArchivo" class="form-label">Nombre del reporte:</label>
-        <input type="text" class="form-control" id="nombreArchivo" name="nombreArchivo" />
     </div>
+    <div class="row">
+        <div class="mb-3 col-sm-3 col-md-3 col-lg-3">
+            <a asp-action="ExportarExcel"  class="btn btn-success">Generar reporte</a>
+            @* <a href="@Url.Action("ExportarExcel", new { nombreReporte = Model.NombreEstado })">Exportar a Excel</a> *@
+            @* <a class="btn btn-secondary" asp-route-data="@nombrereporte" asp-action="IndexEntradasSalidas">Cancelar</a> *@
+            <button class="btn btn-primary" type="submit"> descargar reporte</button>
+        @* <a asp-action="YourAction" asp-route-nombrereporte="@hiddenInput.value">Link Text</a> *@
+        </div>
 
-</div>
-<div class="row">
-    <div class="mb-3 col-sm-3 col-md-3 col-lg-3">
-        <a asp-action="ExportarExcel" class="btn btn-success">Generar reporte</a>
-        <a class="btn btn-secondary" asp-action="IndexEntradasSalidas">Cancelar</a>
     </div>
+</form>
 
-</div>

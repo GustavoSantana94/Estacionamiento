@@ -5,7 +5,6 @@
 <h5> Entradas / Salidas</h5>
 
 <a asp-action="RegistrarEntrada" class="btn btn-primary mb-3">Registrar Entrada</a>
-<a asp-action="RegistrarSalida" class="btn btn-primary mb-3">Registrar Salida</a>
 <a asp-action="GenerarReporte" class="btn btn-primary mb-3">Genera informe de pagos</a>
 <table class="table">
     <thead>
@@ -15,6 +14,7 @@
             <th>Fecha salida</th>
             <th>Precio por minuto</th>
             <th>Precio total</th>
+
         </tr>
 
     </thead>
@@ -24,7 +24,15 @@
             <tr>
                 <td>@entradaSalida.Placas</td>
                 <td>@entradaSalida.FechaEntrada</td>
-                <td>@entradaSalida.FechaSalida</td>
+                @if (entradaSalida.FechaSalida != null)
+                {
+                    <td>@entradaSalida.FechaSalida</td>
+                }
+                else
+                {
+                    <td><a class="btn btn-danger" asp-action="RegistrarSalida" asp-route-id="@entradaSalida.Id">Registrar Salida</a></td>
+                }
+                
                 <td>@entradaSalida.PrecioPorMinuto</td>
                 <td>@entradaSalida.PrecioTotal</td>
                 
